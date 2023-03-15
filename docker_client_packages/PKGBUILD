@@ -1,0 +1,19 @@
+# Maintainer: Ian Wright <ianwrightaw@gmail.com>
+pkgname=docker-client-binaries
+pkgver=23.0.1
+pkgrel=1
+arch=('x86_64')
+pkgdesc="Docker client binaries"
+conflicts=("docker-compose" "docker-compose-git")
+bins=("docker" "dockerd" "docker-init" "docker-proxy")
+dockerclientversion=23.0.1
+url="https://download.docker.com/linux/static/stable/$CARCH/docker-$dockerclientversion.tgz"
+source=($url)
+
+
+package() { 
+    for bin in ${bins[@]}; do
+    	install -Dm0755 -t "$pkgdir/usr/bin/" ${srcdir}/docker/$bin
+    done	
+}
+md5sums=('240e17455d55c67af34fb09809649702')
